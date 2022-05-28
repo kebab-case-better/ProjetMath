@@ -59,14 +59,14 @@ def liste_en_proba():
 
 def affichage_proba(plt):
     x = range(1,len(historique)+1)
-    for traitement in traitements.keys():
-        #Pourcentage de guerrison si patients>0 sinon 0 pour tout n nombre de patients traités
-        y = [ historique[n][0][traitement]/historique[n][1][traitement]\
-                if historique[n][1][traitement]>0\
-                else 0\
-                for n in range(len(historique))]
-        plt.plot(x,y,label=traitement)
-        plt.legend(loc="center")
+    y=[]
+    for n in range(len(historique)):
+        guerris = 0
+        for traitement in traitements.keys():
+            guerris+=historique[n][0][traitement]
+        y.append(guerris/(n+1))
+    plt.plot(x,y,label="TOTAL")
+    plt.legend(loc="center")
 
 
 
